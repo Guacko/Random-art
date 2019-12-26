@@ -2,8 +2,8 @@ import pygame
 import random
 import math
 
-screenWidth = 700
-screenHeight = 700
+screenWidth = 350
+screenHeight = 350
 centerx = screenWidth/2 
 centery = screenHeight/2
 
@@ -20,8 +20,25 @@ green = [0,255,0]
 blue = [0,0,255]
 white = [255,255,255]
 black = [0,0,0]
+counter = 0
 
 def redrawGameWindow():
+    global counter
+
+    counter += 1
+    if counter > 200:
+        counter = 0
+        displaySurface.fill(black)
+        cell1.color = [random.randrange(0,255),random.randrange(0,255),random.randrange(0,255)]
+        cell2.color = [random.randrange(0,255),random.randrange(0,255),random.randrange(0,255)]
+        cell3.color = [random.randrange(0,255),random.randrange(0,255),random.randrange(0,255)]
+        cell4.color = [random.randrange(0,255),random.randrange(0,255),random.randrange(0,255)]
+        cell5.color = [random.randrange(0,255),random.randrange(0,255),random.randrange(0,255)]
+        cell6.color = [random.randrange(0,255),random.randrange(0,255),random.randrange(0,255)]
+        cell7.color = [random.randrange(0,255),random.randrange(0,255),random.randrange(0,255)]
+        cell8.color = [random.randrange(0,255),random.randrange(0,255),random.randrange(0,255)]
+        cell9.color = [random.randrange(0,255),random.randrange(0,255),random.randrange(0,255)]
+
 
     #displaySurface.fill(black)
     cell1.drawCell()
@@ -141,10 +158,15 @@ class cell:
         self.size = random.randrange(1,5)
         self.rage = random.randrange(0,10)
         self.libido = random.randrange(0,10)
-        self.x = round(centerx + random.randrange(-200,+200))
-        self.y = round(centery + random.randrange(-200,+200)) 
+        self.x = round(centerx + random.randrange(-100,+100))
+        self.y = round(centery + random.randrange(-100,+100))
+        while self.x > -75 and self.x < 75 :
+            self.x = round(centerx + random.randrange(-100,+100))
+        while self.y > -75 and self.y < 75 :
+            self.y = round(centery + random.randrange(-100,+100))
         self.speedx = 0
         self.speedy = 0
+
 
     def drawCell(self):
         pygame.draw.circle(displaySurface,self.color,(self.x,self.y),self.size)
